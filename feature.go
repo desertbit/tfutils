@@ -20,6 +20,13 @@ func GetFeatureFromGoType(x interface{}) (*tf.Feature, error) {
 		return &tf.Feature{Kind: &tf.Feature_Int64List{Int64List: &tf.Int64List{[]int64{int64(x.(int))}}}}, nil
 	case "string":
 		return &tf.Feature{Kind: &tf.Feature_BytesList{BytesList: &tf.BytesList{[][]byte{[]byte(x.(string))}}}}, nil
+	case "[]string":
+		ss := x.([]string)
+		bs := make([][]byte, len(ss))
+		for i, s := range ss {
+			bs[i] = []byte(s)
+		}
+		return &tf.Feature{Kind: &tf.Feature_BytesList{BytesList: &tf.BytesList{bs}}}, nil
 	case "[]uint8":
 		return &tf.Feature{Kind: &tf.Feature_BytesList{BytesList: &tf.BytesList{[][]byte{[]byte(x.([]uint8))}}}}, nil
 	case "[]int64":
