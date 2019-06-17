@@ -6,10 +6,10 @@ package tensorflow
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import tensorflow2 "tensorflow/core/framework"
-import tensorflow11 "tensorflow/core/framework"
-import tensorflow3 "tensorflow/core/framework"
-import tensorflow9 "tensorflow/core/framework"
+import tensorflow2 "github.com/recogni/tfutils/tensorflow/core/framework"
+import tensorflow11 "github.com/recogni/tfutils/tensorflow/core/framework"
+import tensorflow3 "github.com/recogni/tfutils/tensorflow/core/framework"
+import tensorflow9 "github.com/recogni/tfutils/tensorflow/core/framework"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal

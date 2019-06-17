@@ -5,9 +5,7 @@ import (
 	"reflect"
 
 	"github.com/golang/protobuf/proto"
-
-	// Import the "example" and "feature" protocol buffers
-	tf "tensorflow/core/example"
+	tf "github.com/recogni/tfutils/tensorflow/core/example"
 )
 
 // GetFeatureFromGoType returns a tensorflow Feature instance for the
@@ -17,24 +15,24 @@ func GetFeatureFromGoType(x interface{}) (*tf.Feature, error) {
 	tstr := reflect.TypeOf(x).String()
 	switch tstr {
 	case "int":
-		return &tf.Feature{Kind: &tf.Feature_Int64List{Int64List: &tf.Int64List{[]int64{int64(x.(int))}}}}, nil
+		return &tf.Feature{Kind: &tf.Feature_Int64List{Int64List: &tf.Int64List{Value: []int64{int64(x.(int))}}}}, nil
 	case "string":
-		return &tf.Feature{Kind: &tf.Feature_BytesList{BytesList: &tf.BytesList{[][]byte{[]byte(x.(string))}}}}, nil
+		return &tf.Feature{Kind: &tf.Feature_BytesList{BytesList: &tf.BytesList{Value: [][]byte{[]byte(x.(string))}}}}, nil
 	case "[]string":
 		ss := x.([]string)
 		bs := make([][]byte, len(ss))
 		for i, s := range ss {
 			bs[i] = []byte(s)
 		}
-		return &tf.Feature{Kind: &tf.Feature_BytesList{BytesList: &tf.BytesList{bs}}}, nil
+		return &tf.Feature{Kind: &tf.Feature_BytesList{BytesList: &tf.BytesList{Value: bs}}}, nil
 	case "[]uint8":
-		return &tf.Feature{Kind: &tf.Feature_BytesList{BytesList: &tf.BytesList{[][]byte{[]byte(x.([]uint8))}}}}, nil
+		return &tf.Feature{Kind: &tf.Feature_BytesList{BytesList: &tf.BytesList{Value: [][]byte{[]byte(x.([]uint8))}}}}, nil
 	case "[]int64":
-		return &tf.Feature{Kind: &tf.Feature_Int64List{Int64List: &tf.Int64List{x.([]int64)}}}, nil
+		return &tf.Feature{Kind: &tf.Feature_Int64List{Int64List: &tf.Int64List{Value: x.([]int64)}}}, nil
 	case "[][]uint8":
-		return &tf.Feature{Kind: &tf.Feature_BytesList{BytesList: &tf.BytesList{x.([][]byte)}}}, nil
+		return &tf.Feature{Kind: &tf.Feature_BytesList{BytesList: &tf.BytesList{Value: x.([][]byte)}}}, nil
 	case "[]float32":
-		return &tf.Feature{Kind: &tf.Feature_FloatList{FloatList: &tf.FloatList{x.([]float32)}}}, nil
+		return &tf.Feature{Kind: &tf.Feature_FloatList{FloatList: &tf.FloatList{Value: x.([]float32)}}}, nil
 	}
 	return nil, fmt.Errorf("unknown base type %s", tstr)
 }

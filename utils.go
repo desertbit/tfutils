@@ -28,7 +28,7 @@ func CrcMask(v uint32) uint32 {
 
 func CrcUnmask(v uint32) uint32 {
 	r := v - crc32MaskDelta
-	return ((r >> 17) | (r << 15))
+	return (r >> 17) | (r << 15)
 }
 
 func MaskedCrc(bs []byte, n int64) uint32 {
@@ -62,10 +62,27 @@ func newEntry(data []byte) (*recordEntry, error) {
 
 func (re *recordEntry) Marshal() ([]byte, error) {
 	b := bytes.NewBuffer(make([]byte, 0, re.length+8+4+4))
-	binary.Write(b, binary.LittleEndian, re.length)
-	binary.Write(b, binary.LittleEndian, re.lengthCrc)
-	b.Write(re.data[:])
-	binary.Write(b, binary.LittleEndian, re.dataCrc)
+
+	err := binary.Write(b, binary.LittleEndian, re.length)
+	if err != nil {
+		return nil, err
+	}
+
+	err = binary.Write(b, binary.LittleEndian, re.lengthCrc)
+	if err != nil {
+		return nil, err
+	}
+
+	_, err = b.Write(re.data[:])
+	if err != nil {
+		return nil, err
+	}
+
+	err = binary.Write(b, binary.LittleEndian, re.dataCrc)
+	if err != nil {
+		return nil, err
+	}
+
 	return b.Bytes(), nil
 }
 

@@ -60,7 +60,7 @@ func (rw *RecordWriter) Close() error {
 	// We might have some extra stuff to handle here in the ZLIB compression
 	// is enabled.
 	if rw.f != nil {
-		rw.f.Close()
+		return rw.f.Close()
 	}
 	return nil
 }
