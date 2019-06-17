@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"reflect"
 
+	tf "github.com/desertbit/tfutils/tensorflow/core/example"
 	"github.com/golang/protobuf/proto"
-	tf "github.com/recogni/tfutils/tensorflow/core/example"
 )
 
 // GetFeatureFromGoType returns a tensorflow Feature instance for the

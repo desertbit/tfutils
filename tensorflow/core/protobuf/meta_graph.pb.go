@@ -27,10 +27,10 @@ import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
 import google_protobuf "github.com/golang/protobuf/ptypes/any"
-import tensorflow10 "github.com/recogni/tfutils/tensorflow/core/framework"
-import tensorflow7 "github.com/recogni/tfutils/tensorflow/core/framework"
-import tensorflow2 "github.com/recogni/tfutils/tensorflow/core/framework"
-import tensorflow3 "github.com/recogni/tfutils/tensorflow/core/framework"
+import tensorflow10 "github.com/desertbit/tfutils/tensorflow/core/framework"
+import tensorflow7 "github.com/desertbit/tfutils/tensorflow/core/framework"
+import tensorflow2 "github.com/desertbit/tfutils/tensorflow/core/framework"
+import tensorflow3 "github.com/desertbit/tfutils/tensorflow/core/framework"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
